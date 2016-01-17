@@ -412,8 +412,8 @@ func (c *syncClient) Lset(arg0 string, arg1 int64, arg2 []byte) (err Error) {
 // Redis LREM command.
 func (c *syncClient) Lrem(key string, value []byte, count int64) (result int64, err Error) {
 	arg0bytes := []byte(key)
-	arg1bytes := value
-	arg2bytes := []byte(strconv.FormatInt(count, 10))
+	arg2bytes := value
+	arg1bytes := []byte(strconv.FormatInt(count, 10))
 
 	var resp Response
 	resp, err = c.conn.ServiceRequest(&LREM, [][]byte{arg0bytes, arg1bytes, arg2bytes})
