@@ -798,6 +798,30 @@ func (c *syncClient) Zscore(arg0 string, arg1 []byte) (result float64, err Error
 
 }
 
+// Redis ZRANK command.
+func (c *syncClient) Zrank(arg0 string, arg1 []byte) (result int64, err Error) {
+	arg0bytes := []byte(arg0)
+	arg1bytes := arg1
+
+	var resp Response
+	resp, err = c.conn.ServiceRequest(&ZRANK, [][]byte{arg0bytes, arg1bytes})
+	if err == nil {
+		buff := resp.GetBulkData()
+		result, err = Btoi64(buff)
+	}
+
+	return result, err
+
+}
+
+func Btoi64(buff []byte) (num int64, e Error) {
+	num, ce := strconv.ParseInt(bytes.NewBuffer(buff).String(), 10, 64)
+	if ce != nil {
+		e = newSystemErrorWithCause("Expected a parsable byte representation of a float64", ce)
+	}
+	return
+}
+
 func Btof64(buff []byte) (num float64, e Error) {
 	num, ce := strconv.ParseFloat(bytes.NewBuffer(buff).String(), 64)
 	if ce != nil {
