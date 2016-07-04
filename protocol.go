@@ -214,6 +214,11 @@ func GetResponse(reader *bufio.Reader, cmd *Command) (resp Response, err Error) 
 
 	buf := readToCRLF(reader)
 
+	fmt.Println("cmd:", cmd.Code)
+	fmt.Println("cmd:", cmd.ReqType)
+	fmt.Println("cmd:", cmd.RespType)
+	fmt.Println("buf:", string(buf))
+
 	// Redis error
 	if buf[0] == err_byte {
 		resp = &_response{msg: string(buf[1:]), isError: true}
