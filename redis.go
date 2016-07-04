@@ -281,6 +281,9 @@ type Client interface {
 	// Redis ZRANK command.
 	Zrank(key string, arg1 []byte) (result int64, err Error)
 
+	// Redis ZREVRANK command.
+	Zrevrank(key string, arg1 []byte) (result int64, err Error)
+
 	// Redis ZRANGE command.
 	Zrange(key string, arg1 int64, arg2 int64) (result [][]byte, err Error)
 
@@ -495,6 +498,9 @@ type AsyncClient interface {
 
 	// Redis ZRANK command.
 	Zrank(key string, arg1 []byte) (result FutureInt64, err Error)
+
+	// Redis ZREVRANK command.
+	Zrevrank(key string, arg1 []byte) (result FutureInt64, err Error)
 
 	// Redis ZRANGE command.
 	Zrange(key string, arg1 int64, arg2 int64) (result FutureBytesArray, err Error)
