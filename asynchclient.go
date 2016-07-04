@@ -801,6 +801,21 @@ func (c *asyncClient) Zscore(arg0 string, arg1 []byte) (result FutureFloat64, er
 
 }
 
+// Redis ZRANK command.
+func (c *asyncClient) Zrank(arg0 string, arg1 []byte) (result FutureInt64, err Error) {
+	arg0bytes := []byte(arg0)
+	arg1bytes := arg1
+
+	var resp *PendingResponse
+	resp, err = c.conn.QueueRequest(&ZRANK, [][]byte{arg0bytes, arg1bytes})
+	if err == nil {
+		result = resp.future.(FutureInt64)
+	}
+
+	return result, err
+
+}
+
 // Redis ZRANGE command.
 func (c *asyncClient) Zrange(arg0 string, arg1 int64, arg2 int64) (result FutureBytesArray, err Error) {
 	arg0bytes := []byte(arg0)
@@ -842,21 +857,6 @@ func (c *asyncClient) Zrangebyscore(arg0 string, arg1 float64, arg2 float64) (re
 	if err == nil {
 		result = resp.future.(FutureBytesArray)
 	}
-	return result, err
-
-}
-
-// Redis ZRANK command.
-func (c *asyncClient) Zrank(arg0 string, arg1 []byte) (result FutureInt64, err Error) {
-	arg0bytes := []byte(arg0)
-	arg1bytes := arg1
-
-	var resp *PendingResponse
-	resp, err = c.conn.QueueRequest(&ZRANK, [][]byte{arg0bytes, arg1bytes})
-	if err == nil {
-		result = resp.future.(FutureInt64)
-	}
-
 	return result, err
 
 }

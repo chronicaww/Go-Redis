@@ -817,7 +817,7 @@ func (c *syncClient) Zrank(arg0 string, arg1 []byte) (result int64, err Error) {
 func Btoi64(buff []byte) (num int64, e Error) {
 	num, ce := strconv.ParseInt(bytes.NewBuffer(buff).String(), 10, 64)
 	if ce != nil {
-		e = newSystemErrorWithCause("Expected a parsable byte representation of a float64", ce)
+		e = newSystemErrorWithCause("Expected a parsable byte representation of a int64", ce)
 	}
 	return
 }

@@ -174,10 +174,10 @@ var (
 	ZREM          Command = Command{"ZREM", KEY_VALUE, BOOLEAN}
 	ZCARD         Command = Command{"ZCARD", KEY, NUMBER}
 	ZSCORE        Command = Command{"ZSCORE", KEY_VALUE, BULK}
+	ZRANK         Command = Command{"ZRANK", KEY_VALUE, BULK}
 	ZRANGE        Command = Command{"ZRANGE", KEY_NUM_NUM, MULTI_BULK}
 	ZREVRANGE     Command = Command{"ZREVRANGE", KEY_NUM_NUM, MULTI_BULK}
 	ZRANGEBYSCORE Command = Command{"ZRANGEBYSCORE", KEY_NUM_NUM, MULTI_BULK}
-	ZRANK         Command = Command{"ZRANK", KEY_VALUE, BULK}
 	SELECT        Command = Command{"SELECT", KEY, STATUS}
 	FLUSHDB       Command = Command{"FLUSHDB", NO_ARG, STATUS}
 	FLUSHALL      Command = Command{"FLUSHALL", NO_ARG, STATUS}

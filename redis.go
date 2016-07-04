@@ -278,6 +278,9 @@ type Client interface {
 	// Redis ZSCORE command.
 	Zscore(key string, arg1 []byte) (result float64, err Error)
 
+	// Redis ZRANK command.
+	Zrank(key string, arg1 []byte) (result int64, err Error)
+
 	// Redis ZRANGE command.
 	Zrange(key string, arg1 int64, arg2 int64) (result [][]byte, err Error)
 
@@ -286,9 +289,6 @@ type Client interface {
 
 	// Redis ZRANGEBYSCORE command.
 	Zrangebyscore(key string, arg1 float64, arg2 float64) (result [][]byte, err Error)
-
-	// Redis ZRANK command.
-	Zrank(key string, arg1 []byte) (result int64, err Error)
 
 	// Redis HGET command.
 	Hget(key string, hashkey string) (result []byte, err Error)
@@ -493,6 +493,9 @@ type AsyncClient interface {
 	// Redis ZSCORE command.
 	Zscore(key string, arg1 []byte) (result FutureFloat64, err Error)
 
+	// Redis ZRANK command.
+	Zrank(key string, arg1 []byte) (result FutureInt64, err Error)
+
 	// Redis ZRANGE command.
 	Zrange(key string, arg1 int64, arg2 int64) (result FutureBytesArray, err Error)
 
@@ -501,9 +504,6 @@ type AsyncClient interface {
 
 	// Redis ZRANGEBYSCORE command.
 	Zrangebyscore(key string, arg1 float64, arg2 float64) (result FutureBytesArray, err Error)
-
-	// Redis ZRANK command.
-	Zrank(key string, arg1 []byte) (result FutureInt64, err Error)
 
 	// Redis FLUSHDB command.
 	Flushdb() (status FutureBool, err Error)
