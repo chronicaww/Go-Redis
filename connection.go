@@ -351,7 +351,6 @@ func (c *connHdl) ServiceRequest(cmd *Command, args [][]byte) (resp Response, er
 		return
 	}
 
-	fmt.Printf("args:")
 	for _, v := range args {
 		fmt.Printf("%s ", string(v))
 	}

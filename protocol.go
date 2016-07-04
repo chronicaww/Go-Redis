@@ -214,11 +214,6 @@ func GetResponse(reader *bufio.Reader, cmd *Command) (resp Response, err Error) 
 
 	buf := readToCRLF(reader)
 
-	fmt.Println("cmd:", cmd.Code)
-	fmt.Println("cmd:", cmd.ReqType)
-	fmt.Println("cmd:", cmd.RespType)
-	fmt.Println("buf:", string(buf[0]), string(buf[1:]))
-
 	// Redis error
 	if buf[0] == err_byte {
 		resp = &_response{msg: string(buf[1:]), isError: true}
@@ -238,10 +233,10 @@ func GetResponse(reader *bufio.Reader, cmd *Command) (resp Response, err Error) 
 		resp = &_response{boolval: buf[1] == true_byte}
 		return
 	case NUMBER:
-		fmt.Println("NUMBER:", string(buf[1:]))
 		assertCtlByte(buf, num_byte, "NUMBER")
 		n, e := strconv.ParseInt(string(buf[1:]), 10, 64)
 		assertNotError(e, "in GetResponse - parse error in NUMBER response")
+
 		resp = &_response{numval: n}
 		return
 	case VIRTUAL:
@@ -273,7 +268,6 @@ func assertCtlByte(buf []byte, b byte, info string) {
 
 // panics on error (with redis.Error)
 func assertNotError(e error, info string) {
-	fmt.Println("assertNotError:", e, info)
 	if e != nil {
 		panic(newSystemErrorWithCause(info, e))
 	}

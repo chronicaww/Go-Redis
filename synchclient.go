@@ -806,20 +806,11 @@ func (c *syncClient) Zrank(arg0 string, arg1 []byte) (result int64, err Error) {
 	var resp Response
 	resp, err = c.conn.ServiceRequest(&ZRANK, [][]byte{arg0bytes, arg1bytes})
 	if err == nil {
-		buff := resp.GetBulkData()
-		result, err = Btoi64(buff)
+		result = resp.GetNumberValue()
 	}
 
 	return result, err
 
-}
-
-func Btoi64(buff []byte) (num int64, e Error) {
-	num, ce := strconv.ParseInt(bytes.NewBuffer(buff).String(), 10, 64)
-	if ce != nil {
-		e = newSystemErrorWithCause("Expected a parsable byte representation of a int64", ce)
-	}
-	return
 }
 
 func Btof64(buff []byte) (num float64, e Error) {
