@@ -174,7 +174,7 @@ var (
 	ZREM          Command = Command{"ZREM", KEY_VALUE, BOOLEAN}
 	ZCARD         Command = Command{"ZCARD", KEY, NUMBER}
 	ZSCORE        Command = Command{"ZSCORE", KEY_VALUE, BULK}
-	ZRANK         Command = Command{"ZRANK", KEY_VALUE, BULK}
+	ZRANK         Command = Command{"ZRANK", KEY_VALUE, NUMBER}
 	ZRANGE        Command = Command{"ZRANGE", KEY_NUM_NUM, MULTI_BULK}
 	ZREVRANGE     Command = Command{"ZREVRANGE", KEY_NUM_NUM, MULTI_BULK}
 	ZRANGEBYSCORE Command = Command{"ZRANGEBYSCORE", KEY_NUM_NUM, MULTI_BULK}
