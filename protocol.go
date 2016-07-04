@@ -221,6 +221,7 @@ func GetResponse(reader *bufio.Reader, cmd *Command) (resp Response, err Error) 
 
 	// Redis error
 	if buf[0] == err_byte {
+		fmt.Println("errtypeerr")
 		resp = &_response{msg: string(buf[1:]), isError: true}
 		return
 	}
@@ -247,11 +248,11 @@ func GetResponse(reader *bufio.Reader, cmd *Command) (resp Response, err Error) 
 		resp = &_response{boolval: true}
 		return
 	case BULK:
+		fmt.Println("resptype:Bulk")
 		assertCtlByte(buf, size_byte, "BULK")
 		size, e := strconv.Atoi(string(buf[1:]))
 		assertNotError(e, "in GetResponse - parse error in BULK size")
 		resp = &_response{bulkdata: readBulkData(reader, size)}
-		fmt.Println("resp:", resp.GetNumberValue())
 		return
 	case MULTI_BULK:
 		assertCtlByte(buf, count_byte, "MULTI_BULK")
