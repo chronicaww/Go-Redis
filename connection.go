@@ -351,6 +351,12 @@ func (c *connHdl) ServiceRequest(cmd *Command, args [][]byte) (resp Response, er
 		return
 	}
 
+	fmt.Printf("args:")
+	for _, v := range args {
+		fmt.Printf("%s ", string(v))
+	}
+	fmt.Println()
+
 	buff := CreateRequestBytes(cmd, args)
 	sendRequest(c.conn, buff) // panics
 
