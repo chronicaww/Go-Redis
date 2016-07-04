@@ -238,6 +238,7 @@ func GetResponse(reader *bufio.Reader, cmd *Command) (resp Response, err Error) 
 		resp = &_response{boolval: buf[1] == true_byte}
 		return
 	case NUMBER:
+		fmt.Println("NUMBER:", string(buf[1:]))
 		assertCtlByte(buf, num_byte, "NUMBER")
 		n, e := strconv.ParseInt(string(buf[1:]), 10, 64)
 		assertNotError(e, "in GetResponse - parse error in NUMBER response")
