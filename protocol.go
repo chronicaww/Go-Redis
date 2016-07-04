@@ -220,7 +220,7 @@ func GetResponse(reader *bufio.Reader, cmd *Command) (resp Response, err Error) 
 	fmt.Println("buf:", string(buf))
 
 	// Redis error
-	if buf[0] == err_byte {
+	if buf[0] == err_byte && cmd.Code != ZSCORE.Code {
 		resp = &_response{msg: string(buf[1:]), isError: true}
 		return
 	}
